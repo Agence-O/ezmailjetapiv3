@@ -41,10 +41,10 @@ function mailjetStatusCode($response_code){
 }
 
 // We try to create a new contact
-$paramsCreateContact = [
-    "method"    => "POST",
-    "Email"     => $email
-];
+$paramsCreateContact = array(
+    "method" => "POST",
+    "Email" => $email
+);
 $resultCreateContact = $mailjet->contact($paramsCreateContact);
 
 $returnCreateContact = [
@@ -60,4 +60,36 @@ $paramsGetContact = [
 ];
 $resultGetContact = $mailjet->contact($paramsGetContact);
 
+$result = [
+    'result'        => $resultGetContact,
+    'response_code' => $mailjet->_response_code,
+    'message'       => $message = mailjetStatusCode($mailjet->_response_code)
+];
+
+if($resultGetContact != false){
+    $contactID = $resultGetContact->Data[0]->ID;
+
+    $paramsAddContactToList =[
+        "method"    => "POST",
+        "ContactID" => $contactID,
+        "ListID"    => $listID,
+        "IsActive"  => "True"
+    ];
+
+    $resultAddContactToList = $mailjet->listrecipient($paramsAddContactToList);
+
+    if($mailjet->_response_code === 400)
+        $message = "You have already subscribed, thank you for your interest.";
+    elseif($mailjet->_response_code === 201)
+        $message = "You have successfully subscribed to our newsletter, thank you !";
+
+    $result = [
+        'result'        => $resultAddContactToList,
+        'response_code' => $mailjet->_response_code,
+        'message'       => $message
+    ];
+}
+
+header('Content-type: application/json; charset=utf-8');
+echo json_encode($result);
 eZExecution::cleanExit();
