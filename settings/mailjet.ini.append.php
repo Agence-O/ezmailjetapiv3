@@ -2,7 +2,7 @@
 
 [MailjetSettings]
 ApiKey=YourApiKeyHere
-ApiSecretKey=YourSecretKeyHere
-ListID=13
+ApiSecretKey=YourApiKeyHere
+ListID=YourListIDHere
 
 */ ?>
