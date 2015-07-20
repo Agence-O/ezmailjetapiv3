@@ -1,4 +1,4 @@
-# ezmailjetapiv3
+# eZ Mailjet Api V3
 eZ Mailjet API V3 is an eZ Publish extension for generic user registration.
 The current version of eZ Mailjet API V3 is 1.0.
 More to come soon.

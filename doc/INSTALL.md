@@ -1,4 +1,4 @@
-# ezmailjetapiv3
+# eZ Mailjet Api V3
 
 ## Installation
 1. Copy the package into the `extension' directory in the root of your eZ Publish installation.
