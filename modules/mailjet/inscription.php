@@ -79,9 +79,9 @@ if($resultGetContact != false){
     $resultAddContactToList = $mailjet->listrecipient($paramsAddContactToList);
 
     if($mailjet->_response_code === 400)
-        $message = "You have already subscribed, thank you for your interest.";
+        $message = ezpI18n::tr("mailjet/inscription", "You have already subscribed, thank you for your interest.");
     elseif($mailjet->_response_code === 201)
-        $message = "You have successfully subscribed to our newsletter, thank you !";
+        $message = ezpI18n::tr("mailjet/inscription", "You have successfully subscribed to our newsletter, thank you !");
 
     $result = [
         'result'        => $resultAddContactToList,
